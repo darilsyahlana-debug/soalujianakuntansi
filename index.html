@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan 50 Soal Pengantar Akuntansi – HOTS UT</title>
+<style>
+body { font-family: Arial; background:#f0f0f0; padding:20px; }
+.container { background:white; padding:20px; border-radius:10px; max-width:900px; margin:auto; }
+.soal { margin-bottom:20px; padding:15px; border-left:4px solid #007bff; background:#fafafa; border-radius:5px; }
+button { padding:10px 20px; margin-top:20px; font-size:16px; cursor:pointer; }
+.kunci { margin-top:10px; font-weight:bold; color:green; display:none; }
+.salah { color:red; font-weight:bold; }
+.hasil { margin-top:20px; font-weight:bold; font-size:18px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Latihan 50 Soal Pengantar Akuntansi – HOTS Universitas Terbuka</h2>
+
+<div id="quiz"></div>
+
+<button onclick="periksa()">Periksa Jawaban</button>
+<div class="hasil" id="hasil"></div>
+
+</div>
+
+<script>
+// ========== 50 SOAL + KUNCI ==========
+
+const questions = [
+{q:"1. Tujuan utama akuntansi keuangan adalah ...", a:"b", o:{a:"Informasi manajerial internal", b:"Informasi pihak eksternal", c:"Mengukur produktivitas", d:"Menghitung pajak"}},
+{q:"2. Perusahaan jasa berbeda dari perusahaan dagang karena ...", a:"a", o:{a:"Tidak memiliki persediaan", b:"Tidak perlu transaksi", c:"Tidak perlu laporan laba rugi", d:"Tidak memiliki kewajiban"}},
+{q:"3. Transaksi pertama kali dicatat dalam ...", a:"b", o:{a:"Buku besar", b:"Jurnal umum", c:"Neraca saldo", d:"Laba rugi"}},
+{q:"4. Pembelian perlengkapan kredit dicatat dengan ...", a:"b", o:{a:"Perlengkapan–Kas", b:"Perlengkapan–Utang", c:"Utang–Perlengkapan", d:"Kas–Perlengkapan"}},
+{q:"5. Penyusutan peralatan mengakibatkan ...", a:"b", o:{a:"Aset naik", b:"Aset turun dan beban naik", c:"Aset naik dan beban turun", d:"Aset tak berubah"}},
+{q:"6. Pendapatan dicatat saat kas diterima adalah basis ...", a:"b", o:{a:"Akrual", b:"Kas", c:"Gabungan", d:"Konsinyasi"}},
+{q:"7. Pembayaran utang gaji menyebabkan ...", a:"b", o:{a:"Beban naik", b:"Kas turun, utang turun", c:"Aset naik", d:"Ekuitas turun"}},
+{q:"8. Posting dilakukan setelah ...", a:"b", o:{a:"Laporan keuangan", b:"Jurnal umum", c:"Penyesuaian", d:"Neraca saldo"}},
+{q:"9. Persediaan akhir lebih besar dari awal menyebabkan HPP ...", a:"b", o:{a:"Naik", b:"Turun", c:"Tetap", d:"Tidak dapat dihitung"}},
+{q:"10. Asuransi 2 tahun dibayar di muka, penyesuaian akhir tahun pertama adalah ...", a:"b", o:{a:"Debit beban–Kas", b:"Debit beban–Kredit asuransi dibayar di muka", c:"Debit aset–Kredit pendapatan", d:"Debit utang–Kredit aset"}},
+{q:"11. Kesalahan overstated revenue tahun lalu menyebabkan ...", a:"c", o:{a:"Laba naik", b:"Liabilitas naik", c:"Ekuitas turun", d:"Aset turun"}},
+{q:"12. Harga naik, FIFO menghasilkan ...", a:"b", o:{a:"HPP tinggi", b:"Laba tinggi", c:"Persediaan rendah", d:"Aset tetap naik"}},
+{q:"13. (Sebab-akibat) Akrual mencerminkan posisi ekonomi. Pendapatan diakui saat kas diterima.", a:"b", o:{a:"Benar–Benar", b:"Benar–Salah", c:"Salah–Benar", d:"Salah–Salah"}},
+{q:"14. Beban dibayar di muka adalah aset karena menambah keuntungan.", a:"b", o:{a:"Benar–Benar", b:"Benar–Salah", c:"Salah–Benar", d:"Salah–Salah"}},
+{q:"15. Neraca saldo sebelum penyesuaian digunakan untuk cek keseimbangan.", a:"a", o:{a:"Benar–Benar", b:"Benar–Salah", c:"Salah–Benar", d:"Salah–Salah"}},
+{q:"16. Laba ditahan bertambah karena aset bertambah.", a:"b", o:{a:"Benar–Benar", b:"Benar–Salah", c:"Salah–Benar", d:"Salah–Salah"}},
+{q:"17. Depresiasi mengurangi ekuitas karena meningkatkan pendapatan.", a:"b", o:{a:"Benar–Benar", b:"Benar–Salah", c:"Salah–Benar", d:"Salah–Salah"}},
+{q:"18. Perpetual tidak butuh pencatatan HPP.", a:"b", o:{a:"Benar–Benar", b:"Benar–Salah", c:"Salah–Benar", d:"Salah–Salah"}},
+{q:"19. Beban dibayar di muka berubah menjadi beban setelah dipakai.", a:"a", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"20. Buku besar berisi ringkasan transaksi per akun.", a:"a", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"21. Pendapatan diterima di muka adalah pendapatan.", a:"b", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"22. Laporan laba rugi menunjukkan posisi keuangan tanggal tertentu.", a:"b", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"23. Aset tetap tidak pernah mengalami penurunan nilai.", a:"b", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"24. HPP dapat dihitung tanpa persediaan awal.", a:"b", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"25. Metode garis lurus menimbulkan beban tetap tiap periode.", a:"a", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"26. Kas selalu berubah dalam setiap transaksi.", a:"b", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"27. Jurnal penutup dibuat untuk akun nominal.", a:"a", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"28. Utang jangka panjang jatuh tempo <1 tahun.", a:"b", o:{a:"Benar", b:"Salah", c:"-", d:"-"}},
+{q:"29. Pendapatan diterima Desember untuk jasa Januari adalah ...", a:"b", o:{a:"Beban dibayar di muka", b:"Pendapatan diterima di muka", c:"Pendapatan", d:"Piutang"}},
+{q:"30. Perlengkapan awal 5 juta, akhir 1 juta. Beban ...", a:"c", o:{a:"1 juta", b:"2 juta", c:"4 juta", d:"6 juta"}},
+{q:"31. Gaji belum dibayar menyebabkan ...", a:"d", o:{a:"Aset turun", b:"Aset naik", c:"Ekuitas turun", d:"Utang naik & beban naik"}},
+{q:"32. Pembelian barang (perpetual) kredit dicatat ...", a:"b", o:{a:"Persediaan–Kas", b:"Persediaan–Utang", c:"Pembelian–Kas", d:"Pembelian–Utang"}},
+{q:"33. Transaksi tercatat hanya pada kredit adalah ...", a:"a", o:{a:"Error of omission", b:"Error of commission", c:"Error of principle", d:"Error of duplication"}},
+{q:"34. Depresiasi peralatan (40–5)/5 adalah ...", a:"a", o:{a:"7 juta", b:"8 juta", c:"9 juta", d:"10 juta"}},
+{q:"35. Pendapatan 50 juta, beban 30 juta, dividen 5 juta. Kenaikan ekuitas ...", a:"a", o:{a:"20 juta", b:"25 juta", c:"15 juta", d:"30 juta"}},
+{q:"36. Sistem periodik memakai akun ...", a:"b", o:{a:"Persediaan", b:"Pembelian", c:"HPP", d:"Beban angkut"}},
+{q:"37. Aset lancar naik tanpa perubahan liabilitas karena ...", a:"c", o:{a:"Pembayaran utang", b:"Pembelian kredit", c:"Penjualan tunai", d:"Pembayaran beban"}},
+{q:"38. Pendapatan dicatat lebih kecil → ekuitas ...", a:"c", o:{a:"Aset kecil", b:"Utang besar", c:"Ekuitas kecil", d:"Beban kecil"}},
+{q:"39. Penjualan 100, HPP 60, beban 20 → laba ...", a:"c", o:{a:"15", b:"20", c:"25", d:"30"}},
+{q:"40. Lupa penyesuaian beban dibayar di muka → laba ...", a:"c", o:{a:"Rendah", b:"Normal", c:"Tinggi", d:"Tidak berubah"}},
+{q:"41. Penyisihan piutang menyebabkan ...", a:"a", o:{a:"Aset turun, beban naik", b:"Aset naik, beban turun", c:"Aset naik, pendapatan turun", d:"Liabilitas naik"}},
+{q:"42. Penjualan 70, retur 5, diskon 2 → penjualan bersih ...", a:"a", o:{a:"63", b:"65", c:"68", d:"70"}},
+{q:"43. FIFO: akhir 25 unit @12 adalah ...", a:"a", o:{a:"25 @12", b:"20 @12", c:"30 @10", d:"25 @10"}},
+{q:"44. Penerbitan saham menyebabkan ...", a:"b", o:{a:"Aset turun", b:"Aset naik & ekuitas naik", c:"Utang naik", d:"Ekuitas turun"}},
+{q:"45. Diskon 2% dari 15 juta → bayar ...", a:"b", o:{a:"15,3", b:"14,7", c:"14,5", d:"15"}},
+{q:"46. Revaluasi naik menyebabkan ...", a:"b", o:{a:"Aset turun", b:"Aset naik & ekuitas naik", c:"Aset naik & utang naik", d:"Liabilitas turun"}},
+{q:"47. Biaya angkut ditanggung penjual → beban ...", a:"a", o:{a:"Tidak menambah biaya pembeli", b:"Masuk HPP pembeli", c:"Mengurangi laba pembeli", d:"Beban angkut penjualan"}},
+{q:"48. Penjualan kredit tanpa piutang membuat pendapatan ...", a:"b", o:{a:"Tinggi", b:"Rendah", c:"Tetap", d:"Tidak berubah"}},
+{q:"49. Depresiasi tidak dicatat → laba ...", a:"a", o:{a:"Terlalu tinggi", b:"Terlalu rendah", c:"Normal", d:"Tidak berubah"}},
+{q:"50. Modal 40, peralatan 10, pendapatan 12 → aset ...", a:"d", o:{a:"40", b:"42", c:"50", d:"52"}}
+];
+
+// ========== GENERATE SOAL ==========
+
+let html = "";
+questions.forEach((s,i)=>{
+  html += `<div class='soal' id='soal${i}'>
+  <p><b>${s.q}</b></p>
+  ${Object.keys(s.o).map(k=>`
+    <label><input type='radio' name='soal${i}' value='${k}'> ${k}. ${s.o[k]}</label><br>
+  `).join("")}
+  <div class='kunci' id='kunci${i}'>Kunci: ${s.a}</div>
+  </div>`;
+});
+
+document.getElementById("quiz").innerHTML = html;
+
+// ========== FUNGSI PERIKSA ==========
+
+function periksa(){
+  let benar = 0;
+
+  questions.forEach((s,i)=>{
+    let pilih = document.querySelector(`input[name='soal${i}']:checked`);
+    let kunciDiv = document.getElementById(`kunci${i}`);
+
+    if(pilih){
+      if(pilih.value === s.a){
+        benar++;
+        kunciDiv.style.display = "block";
+        kunciDiv.style.color = "green";
+      } else {
+        kunciDiv.style.display = "block";
+        kunciDiv.style.color = "green";
+
+        let salahText = document.createElement("div");
+        salahText.className = "salah";
+        salahText.innerHTML = "Jawaban Anda: " + pilih.value;
+        document.getElementById("soal"+i).appendChild(salahText);
+      }
+    } else {
+      kunciDiv.style.display = "block";
+    }
+  });
+
+  document.getElementById("hasil").innerHTML =
+    "Skor Anda: " + benar + " dari " + questions.length +
+    "<br>Periksa kembali soal yang salah untuk memperkuat pemahaman Anda.";
+}
+
+</script>
+
+</body>
+</html>

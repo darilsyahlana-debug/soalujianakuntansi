@@ -1,0 +1,147 @@
+:root{
+  --bg:#0f172a;
+  --card:#0b1220;
+  --muted:#9aa4b2;
+  --accent:#06b6d4;
+  --good:#10b981;
+  --bad:#ef4444;
+}
+
+body{
+  font-family:Inter,ui-sans-serif,system-ui,Arial;
+  background:linear-gradient(180deg,#071029 0%, #091129 100%);
+  color:#e6eef6;
+  margin:0;
+  padding:24px;
+}
+
+.container{
+  max-width:980px;
+  margin:0 auto;
+}
+
+header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:20px;
+  margin:0;
+}
+
+p.lead{
+  margin:0;
+  color:var(--muted);
+}
+
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(2,6,23,0.6);
+  margin-bottom:14px;
+}
+
+.q{
+  margin-bottom:12px;
+}
+
+.q h3{
+  font-size:14px;
+  margin:0 0 6px;
+}
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+label.option{
+  background:#061226;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.02);
+  cursor:pointer;
+}
+
+input[type="radio"], input[type="checkbox"]{
+  margin-right:8px;
+}
+
+.meta{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.btn{
+  background:var(--accent);
+  color:#042023;
+  padding:10px 14px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.results{
+  margin-top:18px;
+  padding:14px;
+  border-radius:10px;
+  background:linear-gradient(180deg,rgba(2,6,23,0.6),rgba(2,6,23,0.4));
+}
+
+.bar{
+  height:12px;
+  background:#04202a;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.bar > i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--good),#6ee7b7);
+  width:0%;
+}
+
+.feedback{
+  margin-top:10px;
+  color:var(--muted);
+}
+
+textarea{
+  width:100%;
+  min-height:80px;
+  background:#061226;
+  color:inherit;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.03);
+  padding:8px;
+}
+
+footer{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:22px;
+}
+
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.tag{
+  background:#062431;
+  color:#bff6ff;
+  padding:6px 8px;
+  border-radius:8px;
+  font-weight:600;
+}
